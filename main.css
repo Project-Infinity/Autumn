@@ -1,0 +1,568 @@
+@charset "UTF-8";
+/* 
+	Final Project CSS Sytlesheet (hah that's redundant) 
+
+	There is a LOT of CSS Styles (redundant) going on over here
+	and its organized in the following:
+	
+	I. Tags
+	II. Classes 
+	III. ID
+
+	note that some of it might be out of line, but that is because
+	they relate to other classes,ids, tags.
+	
+	we can style and do the artsy stuff later but check it out 
+	if you want to!
+	
+	NOTE some attributes are also commented out
+	DO NOT DELETE THEM! 
+*/
+
+body{
+	height: 100%;
+	width: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	font-family: Helvetica, sans-serif;
+	/*background-image:url(resources/images.jpg);
+	background-repeat:repeat;*/
+	background-color:#E9EAED;
+	/*
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#999999));
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #999999);
+    background-image: -moz-linear-gradient(top, #FFFFFF, #999999);
+    background-image: -ms-linear-gradient(top, #FFFFFF, #999999);
+    background-image: -o-linear-gradient(top, #FFFFFF, #999999);
+    background-image: linear-gradient(top, #FFFFFF, #999999);
+	*/
+}
+
+button {
+	text-align:center;
+	font-size:18px;
+ 	border-top: 1px solid #4081af;
+  	border-right: 1px solid #2e69a3;
+  	border-bottom: 1px solid #20559a;
+  	border-left: 1px solid #2e69a3;
+	-moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+  	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+	text-shadow: 0 -1px 1px #3275bc;
+  	background: #3b88d8;
+  	background: -moz-linear-gradient(0% 100% 90deg, #377ad0, #52a8e8);
+  	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#52a8e8), to(#377ad0));
+	color: #FFFFFF;
+	-webkit-background-clip: padding-box;
+	-moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;	
+}
+
+button:hover {
+  background: #2a81d7;
+  background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
+  border-top: 1px solid #2a73a6;
+  border-right: 1px solid #165899;
+  border-bottom: 1px solid #07428f;
+  border-left: 1px solid #165899;
+  -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
+  -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
+  cursor: pointer;
+  text-shadow: 0 -1px 1px #1d62ab;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+html {
+    height: 100%;
+}
+/*
+input[type=text], input[type=tel]{
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+	width: 100%;
+	height: 100%;
+}
+*/
+input[type=number]{
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+	font-size:18px;
+}
+
+button[type=submit]{
+	width:250px !important;	
+}
+
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+
+table{
+	/*-webkit-animation: fadeIn 3s;
+	animation:fadeIn 3s;*/
+	border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0; 	
+	margin-left:auto; 
+    margin-right:auto;*
+	background-color:transparent;
+	border:none;
+}
+/*
+	the follwing childs are in relation to a DOM tree
+*/
+th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+select{
+	border:none;
+	font-size:18px;
+}
+
+.bordered {
+    border: none #ccc 1px;
+	/*border:none;*/
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    /*-webkit-box-shadow: 0 1px 1px #ccc; 
+    -moz-box-shadow: 0 1px 1px #ccc; 
+    box-shadow: 0 1px 1px #ccc;   */    
+}
+
+.bordered td, .bordered th {
+    border-left: 1px solid #ccc;
+    border-top: 0px solid #ccc;
+    padding: 10px;
+    text-align: center;    
+}
+
+.bordered th {
+	text-align: center;	
+}
+
+.bordered th {
+	/*#ebf3fc, #dce9f9*/
+    background-color: #660000;
+	/*
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#51A7F9), to(#0365C0));
+    background-image: -webkit-linear-gradient(top, #51A7F9, #0365C0);
+    background-image:    -moz-linear-gradient(top, #51A7F9, #0365C0);
+    background-image:     -ms-linear-gradient(top, #51A7F9, #0365C0);
+    background-image:      -o-linear-gradient(top, #51A7F9, #0365C0);
+    background-image:         linear-gradient(top, #51A7F9, #0365C0);
+	*/
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;     
+    border-top: none;
+    /*text-shadow: 0 1px 0 rgba(255,255,255,.5); */
+	color:white;
+}
+
+.bordered td:first-child, .bordered th:first-child {
+    border-left: none;
+}
+
+.bordered th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+
+.bordered th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+.bordered th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.bordered tr:first-child td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+	
+}
+
+.bordered tr:last-child td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+}
+
+.bordered tr:only-child td:only-child {
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+}
+
+.bordered a {
+	/*
+	-webkit-animation: fadeIn 3s;
+	animation:fadeIn 3s;
+	*/
+	font-weight:normal;
+	color: #333333;
+
+}
+
+.bordered caption{
+	background-color:#7E1D19;
+	color: white;
+	font-size: 30px;
+}
+
+.bordered tfoot{
+	background-color: #7E1D19;
+	color: white;
+	-moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;	
+}
+/* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
+.container {
+	position:relative;
+	width: 80%;
+	height: 100%;
+	max-width: 1280px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
+	min-width: 780px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
+	background-color: #FFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+	margin-top: 30px;
+	padding-top: 10px;
+}
+
+
+.desc{
+	position:static;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#9A2621;
+	color: white;
+	height:300px;
+	width:300px;
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;	
+}
+
+.desc h3{
+	text-align:center;	
+}
+
+.desc p, .desc string{
+	margin-left:25px;
+}
+
+.dialog {
+    box-shadow: 0 4px 4px 0 #888;
+}
+
+.filter{
+	padding-top:10px;
+	text-align:center;	
+	width: 100%;
+	background-color: #333333;
+	color: #FFFFFF;
+	display:none;
+
+}
+
+.filter string{
+	font-size: 24px;
+}
+
+.footer {
+	-moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 6px;
+    border-radius: 0 0 0 6px;	
+    background-color: #660000;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.hero{
+	position:static;
+	float:left;
+	display:block;
+	margin-top:auto;
+	margin-left:50px;
+	height: 300px;
+	width: 300px;
+	text-align: center;
+	background-color:white;
+}
+
+.hero img{
+	max-width:100%;	
+	max-height:100%;
+	background-color: white;
+	text-align: center;	
+}
+
+.loginbtn{
+	font-family:Arial, Helvetica, sans-serif;
+	background-color:white;
+}
+
+.menuBar{
+	position:fixed;
+	text-align: left;
+	background-color: #FFFFFF;
+	border-bottom-color: #009000 ;
+	border-bottom-style:solid !important;
+    /*background-image: -webkit-gradient(linear, left top, left bottom, from(#66CC33), to(#006600)) !important;
+    background-image: -webkit-linear-gradient(top, #66CC33, #006600) !important;
+    background-image: -moz-linear-gradient(top, #66CC33, #006600) !important;
+    background-image: -ms-linear-gradient(top, #66CC33, #006600) !important;
+    background-image: -o-linear-gradient(top, #66CC33, #006600) !important;
+    background-image: linear-gradient(top, #66CC33, #006600) !important;*/
+	border-style:hidden;
+	color: #58B665;
+	font-family:titleFont;
+	/*-webkit-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+ 	-moz-border-radius-bottomleft: 6px;
+	-moz-border-radius-bottomright: 6px;*/
+	height: 50px;
+	width: 100%;
+	z-index:1;
+ 	/*-o-border-radius: 10px;
+ 	-ms-border-radius: 10px;
+ 	-khtml-border-radius: 10px;
+ 	border-radius: 10px;*/
+	min-width: 780px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
+}
+
+.menuBar li{
+	display:inline;	
+	margin-right: 20px;
+}
+
+.menuBar a{
+	vertical-align:text-bottom !important;
+	color:#58B665;	
+	font-family:titleFont;
+	text-decoration: none;
+	font-size: 18px;
+	/*text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);*/	
+}
+
+.menuBar string, label{
+	font-size:32px;
+	vertical-align: middle !important;
+	/*text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);*/	
+}
+
+.menuBar table{
+	border-collapse: collapse;	
+}
+.menuBar input{
+	width: 200px;
+	height: 20px;
+	font-size:12px;		
+}
+
+.menuBar button{
+	font-size: 14px;
+	width: 100px !important;
+	height: 25px !important;	
+}
+.menuBar input[type=checkbox]{
+	width: auto !important;
+	height: auto !important;
+}
+.menuBar img{ 
+	height: 24px;
+	vertical-align: text-bottom;
+	/*-webkit-filter: drop-shadow(0px -1px 0px #222);
+    filter: drop-shadow(0px -1px 0px #222); */
+}
+
+#string2 {
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size:12px !important;
+}
+
+.profile{
+	margin-left:auto;
+	margin-right:auto;
+	width: 300px;
+	height:auto;
+	color: #000000;
+	font-weight:bold;	
+}
+
+.profile p{
+	margin-left:25px;	
+}
+
+/*
+.profileEdit{
+	position:static;
+	left:300px;
+}
+*/
+.register {
+	width: 600px;
+	height: 500px;
+	margin: 0 auto;
+	border-style: solid;
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+	border-color:#999;
+	position:relative;
+	top: 100px;
+	bottom: auto;
+	-webkit-box-shadow: 10px 10px 50px 10px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 50px 10px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 50px 10px rgba(0,0,0,0.75); 
+	border-top: 1px solid #4081af;
+  	border-right: 1px solid #2e69a3;
+  	border-bottom: 1px solid #20559a;
+  	border-left: 1px solid #2e69a3; 
+
+}
+.register input{
+	font-size: 14px !important;	
+}
+
+.register table{
+	text-align: left !important;
+	border-collapse: separate;
+    border-spacing: 10px 10px;	
+}
+
+.register button{
+	width: 100% !important;
+	height: 50px;	
+}
+.register h1{
+	font-size: 48px;
+	text-align: center;	
+	font-family: titleFont;
+}
+
+.welcome{
+	text-align:center;	
+}
+
+.titleBar{
+	color:#333333;
+	-webkit-animation: fadeIn 3s;
+	animation:fadeIn 3s;
+	text-align: center;
+}
+
+#checkout{
+	text-align:center;
+}
+
+#checkout input[type=submit]{
+	font-size:20px;	
+}
+
+#dialogBox{
+	background-color: white;	
+	height:auto;
+	/*width: 400px;*/
+	display:none;
+	/*border:solid;*/
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+	border-color:#999;
+	
+}
+/*
+.ui-dialog .ui-dialog-title{
+	-moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+	float: left;
+    margin: .1em 16px .1em 0;
+	text-align:center;
+	width:100%;
+	color: white;
+	background-color:#7E1D19;	
+}
+
+.ui-dialog .ui-dialog-titlebar-close{
+    position: absolute;
+    right: .3em;
+	top: 1em;
+    width: 21px;
+    margin: -10px 0 0 0;
+    padding: 1px;
+    height: 20px;
+}
+*/
+#profileEdit{
+	/*background-color: white;*/	
+	height:auto;
+	/*width: 400px;*/
+	display:none;
+	/*border:solid;*/
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+	border-color:#999;
+	display: none;
+}
+
+#project{
+	display: none;	
+}
+
+@font-face {
+    font-family: titleFont;
+    src: url(Handel_Gothic.ttf);
+}
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
