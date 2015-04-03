@@ -1,6 +1,7 @@
 <?php
     /*
-	Groups page
+        Members profile page 
+        (or, Personal Profile Page boo-yah!)
         
         this is the ONLY page that uses JQuery and AJAX
         More information JQuery in the source.js page.
@@ -16,15 +17,20 @@
     {
         header("Location: index.php");
     }
+	if(is_group($_GET['groupID']) == 0)
+	{
+		header("Location: home.php");
+	}
 	$activeUser = $_SESSION['active_user'];
+	$groupID = $_GET['groupID'];
 	
 	function build_groups()
 	{
 		//build the group divs
 		$userID = $_SESSION['active_user'];
+		$groupID = $_GET['groupID'];
 		
-		$query = "SELECT g.groupID, g.tagline, g.clanTag, g.groupName, gd.hasAlerts, gd.isAdmin, m.memberCount, ad.adminID, ad.adminName FROM tblGroups AS g, tblGroupDetails AS gd RIGHT JOIN(SELECT * FROM qryMembers) AS m ON (gd.groupID = m.groupID) RIGHT JOIN (SELECT * FROM qryGroupAdmins) AS ad ON (gd.groupID = ad.groupID) WHERE g.groupID = gd.groupID AND 
-gd.userID =".$userID.";";
+		$query = "SELECT u.userID, CONCAT(u.fName, ' ' , u.lName) AS userName, u.userPic, gd.isAdmin FROM tblUsers AS u, tblGroupDetails AS gd WHERE u.userID = gd.userID AND gd.groupID = ".$groupID." ORDER BY gd.isAdmin DESC, u.lName ASC;";
 		
 		$conn = db_connect();
         $data = mysqli_query($conn, $query);
@@ -33,25 +39,23 @@ gd.userID =".$userID.";";
 		for($i=0; $i<$num_rows; $i++)
 		{
 			$item = mysqli_fetch_array($data, MYSQLI_ASSOC);
-			if($item['adminID'] == $userID)
+			if($item['isAdmin'] == 1)
 			{
-				$adminName = "You";
+				$span = "<span class='label label-success'>[Admin]</span>";
 			}
 			else
 			{
-				$adminName = $item['adminName'];
+				$span = "";
 			}
 			
 			echo "<div class='media'> \r\n";
 			echo "<div class='media-left'> \r\n";
-			echo "<div style='width: 64px; height: 64px; '><span class='label label-primary'>[".$item['clanTag']."]</span></div> \r\n";
+			echo "<div style='width: 64px; height: 64px; '>".$span."</div> \r\n";
 			echo "</div> \r\n";
 			echo "<div class='media-body'> \r\n";
-			echo "<a href='groupInfo.php?groupID=".$item['groupID']."'><h4 class='media-heading'>".$item['groupName']."</a></h4> \r\n";
-			echo "<span class='text-muted'><i>".$item['tagline']."</i></span> \r\n";
-			echo "<p>Admin: ".$adminName."<br>Members: ".$item['memberCount']."</p>";
-			echo "</div> \r\n";
+			echo "<a href='#=".$item['userID']."'><h4 class='media-heading'>".$item['userName']."</a></h4> \r\n";
 			echo "<hr> \r\n";
+			echo "</div> \r\n";
 			echo "</div> \r\n";
 			
 		}
@@ -59,6 +63,9 @@ gd.userID =".$userID.";";
 		db_disconnect($conn);
 		
 	}
+    
+	$group_data = get_group_info($groupID);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,20 +77,15 @@ gd.userID =".$userID.";";
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <style>
-		@font-face {
-    font-family: titleFont;
-    src: url(../autumn/assets/fonts/Handel_Gothic.ttf);
-					}
-	</style>    
+    <link href="main.css" rel="stylesheet">
 
-    <title>Project Infinity | Groups</title>
+    <title><?php echo $group_data['groupName']; ?> | Project Infinity</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../autumn/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../autumn/assets/css/starter-template.css" rel="stylesheet">
+    <link href="../autumn/assets/css/offcanvas.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -99,30 +101,52 @@ gd.userID =".$userID.";";
   <body>
 	<?php build_navBar(); ?>
     <div class="container">
-    <h1>Groups</h1>
-    <div style="text-align: center;">
-    <form class="form-inline">
-      <div class="form-group">
-        <div class="input-group">
-          <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-          <input type="text" class="form-control" name="tbSearch" id="tbSearch" placeholder="Search For Groups" />
-          <span class="input-group-btn"><button type="submit" class="btn btn-default">Search</button></span>
-        </div>
-      </div>
-      <a class="btn btn-success" href="createGroup.php" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Create Group</a>
-    </form>
-    </div>
-    <div class="starter-template">
-      <!--begin groups -->
-    <?php build_groups(); ?>
-    </div><!-- /.container -->
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs"><button type="button" class="btn btn-primary" data-toggle="offcanvas">Menu</button></p>
+          <div class="jumbotron">
+            <h1><?php echo $group_data['groupName']; ?>&nbsp;<small><span class="label label-primary">[<?php echo $group_data['clanTag'];?>]</small></span></h1>
+            <p class='text-muted'><?php echo $group_data['tagline']; ?></p>
+          </div>
+          <h2>Members in Group</h2>
+          <?php build_groups(); ?>
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href=<?php echo "'groupInfo.php?groupID=".$group_data['groupID']."'"; ?> class="list-group-item">Home</a>
+            <a href=<?php echo "'groupMembers.php?groupID=".$group_data['groupID']."'"; ?> class="list-group-item active">Members</a>
+            <a href="#" class="list-group-item">Leaderboard</a>
+            <?php
+				if($group_data['adminID'] == $activeUser)
+				{
+					echo "<a href='#' class='list-group-item'>Group Settings</a>";
+				}
+			?>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div><!--/.container-->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../autumn/assets/js/bootstrap.min.js"></script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../autumn/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script src="../autumn/assets/js/offcanvas.js"></script>
   </body>
 </html>

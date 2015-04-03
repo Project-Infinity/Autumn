@@ -97,24 +97,54 @@ gd.userID =".$userID.";";
   </head>
 
   <body>
-	<?php build_navBar(); ?>
+  <?php build_navBar(); ?>
+	<!--Begin Content-->
     <div class="container">
-    <h1>Groups</h1>
-    <div style="text-align: center;">
-    <form class="form-inline">
-      <div class="form-group">
-        <div class="input-group">
-          <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-          <input type="text" class="form-control" name="tbSearch" id="tbSearch" placeholder="Search For Groups" />
-          <span class="input-group-btn"><button type="submit" class="btn btn-default">Search</button></span>
-        </div>
-      </div>
-      <a class="btn btn-success" href="createGroup.php" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Create Group</a>
-    </form>
-    </div>
     <div class="starter-template">
-      <!--begin groups -->
-    <?php build_groups(); ?>
+        <form class="form-horizontal">
+        <fieldset>
+        
+        <!-- Form Name -->
+        <legend>Create Group</legend>
+        
+        <!-- Prepended text-->
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">Group Name</span><input name="tbGroupName" type="text" class="form-control" aria-describedby="sizing-addon1" required />
+             </div>
+            <p class="help-block">Type a Group Name</p>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">Motto</span><input name="tbTagline" type="text" class="form-control" aria-describedby="sizing-addon1" />
+             </div>
+            <p class="help-block">Type a Group Motto (Optional)</p>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">Clan Tag</span><input name="tbClanTag" type="text" class="form-control" aria-describedby="sizing-addon1" />
+             </div>
+            <p class="help-block">Enter a Personalized Clan Tag (4 Characters Max)</p>
+        <!-- Multiple Radios -->
+        <div class="control-group">
+          <label class="control-label" for="rbGroupStatus">Group Privacy</label>
+          <div class="controls">
+            <label class="radio" for="rbGroupStatus-0">
+              <input type="radio" name="rbGroupStatus" value="1" checked="checked">
+              Closed Group (Only Admin Can Add Members)
+            </label>
+            <label class="radio" for="rbGroupStatus-1"><input type="radio" id=name="rbGroupStatus-0" name="rbGroupStatus" value="-1">Open Group (Anyone Can Join)</label>
+          </div>
+        </div>
+        
+        <!-- Button -->
+        <div class="control-group">
+          <label class="control-label" for="btnSubmit"></label>
+          <div class="controls">
+            <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-success">Create Group</button>
+          </div>
+        </div>
+        
+        </fieldset>
+        </form>
+   	</div>
     </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript

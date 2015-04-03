@@ -53,33 +53,9 @@
 			{
 				$timeVar = gmdate('H:i:s',$item['totalTime']);
 			}
-			
-			if($UoM == -1)
-			{
-				if($item['totalDistance'] < 1610)
-				{
-					$dist_var = $item['totalDistance']."m";
-				}
-				else
-				{
-					$dist_var = meters_to_miles($item['totalDistance'])." mi";
-				}
-					
-			}
-			else
-			{
-				if($item['totalDistance'] < 1000)
-				{
-					$dist_var = $item['totalDistance']."m";
-				}
-				else
-				{
-					$dist_var = ($item['totalDistance']/1000)." Km";
-				}
-			}
 			echo "<tr> \r\n";
 			echo "<td>".$item['dateLogged1']."</td> \r\n";
-			echo "<td>".$dist_var."</td> \r\n";
+			echo "<td>".get_distance_string($item['totalDistance'], $UoM)."</td> \r\n";
 			echo "<td>".$timeVar."</td> \r\n";
 			echo "</tr> \r\n";
 		}
@@ -122,13 +98,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <style>
-		@font-face {
-    font-family: titleFont;
-    src: url(../autumn/assets/fonts/Handel_Gothic.ttf);
-					}
-	</style>
-
+	<link href="main.css" rel="stylesheet">
     <title>Project Infinity | Home</title>
 
     <!-- Bootstrap core CSS -->
@@ -149,70 +119,20 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#" style="font-family: titleFont;">INFINITY</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Workouts <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="workouts.php">My Workouts</a></li>
-                <li><a href="#">Create Workout</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="groups.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Groups <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="groups.php">My Groups</a></li>
-                <li><a href="#">Create Group</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Messages &nbsp;<span class="badge"><?php echo check_for_messages($activeUser); ?></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <?php build_mini_inbox(); ?>
-                    <li><a href='messages.php'>Go to Inbox</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Update Profile</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Help</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+	<?php build_navBar(); ?>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#overview" data-toggle="collapse">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Stats</a></li>
+            <li><a href="#">Recent Workouts</a></li>
             <li><a href="#goals" data-toggle="collapse">Goals</a></li>
             <li><a href="#">Export</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <div id='overview' class="collapse in">
-            <h1 class="page-header">Running Report for <?php echo get_active_user(); ?></h1>
+            <h1 class="page-header"><?php echo get_active_user(); ?></h1>
   
             <div class="row placeholders">
               <div class="col-xs-6 col-sm-3 placeholder">
@@ -225,13 +145,13 @@
                 <span class="text-muted">Number of Workouts Recorded</span>
               </div>
             </div>
-            <h2 class="sub-header">Workout Summary</h2>
+            <h2 class="sub-header">Recent Workouts&nbsp;<a href="#"><small class='label label-primary' style="font-size:12px">Go to Workout Log &raquo;</small></a></h2>
             <div class="table-responsive">
               <?php build_table(); ?>
             </div>
           </div>
-          <div id='goals' class="collapse">
-          <h1>My Goals</h1>
+          <div id='goals'>
+          <h2 class="sub-header">Goals&nbsp;<a href="#"><small class='label label-primary' style="font-size:12px">Go to Goals &raquo;</small></a></h2>
           <h2>Run 5 Miles</h2>
           <span class="text-muted">Finished! Date Finished: 1/17/2015</span>
           <div class="progress">

@@ -90,64 +90,25 @@
 	<?php build_navBar(); ?>
 
     <div class="container">
-    
-
-      <!--<div class="starter-template">
-        <h3>Team 36 &nbsp; <span class="label label-success">You</span></h3>
-        <span class="text-muted"><i>Runnin' All Day</i></span>
-        <p class="lead">Members: 5</p>
-      </div>
-      <hr>
-      <div class="starter-template">
-        <h3>Group Two &nbsp; <span class="label label-info">John Smith</span></h3>
-        <span class="text-muted"><i>tagline</i></span>
-        <p class="lead">Members: 6</p>
-      </div>"
-      <hr>
-      <div class="starter-template">
-        <h3>Group Two &nbsp; <span class="label label-danger">No Admin</span></h3>
-        <p class="lead">Members: 6</p>
-      </div> -->
     <div class="starter-template">
-      <div class="row">
-        <div class="col-lg">
-          <div class="input-group">
-			<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true" id="sizing-addon1"></span></span>
-            <input type="text" class="form-control" placeholder="Workout Name" aria-describedby="sizing-addon1" />
-            <span class="input-group-btn"><button class="btn btn-default" type="button" aria-describedby="sizing-addon1">Search</button></span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
-      <!--begin groups -->
-      <!--<div class="media">
-        <div class="media-left">
-          <a href="#">
-            <img class="media-object" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Marathon_logo.jpg/64px-Marathon_logo.jpg" alt="Generic placeholder image">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Team 36 &nbsp; <span class="label label-success">You</span></h4>
-          <span class="text-muted"><i>Runnin' All Day</i></span>
-          <p>Members: 5</p>
-        </div>
-      </div>
+    <h2>General Information</h2>
+    	<form class="form-horizontal" name ='frmChangeText' action ='index.php' method ='post' role="form">
+      		<div class="col">
+            	<div class="form-group">
+                	<div class="col-sm-5"><input type="text" name="tbFName" class="form-control" placeholder="First Name" id="inputText3" value="<?php echo $_POST['tbFName'] ;?>" required /></div>
+                </div>
+                <div class="form-group">
+          			<div class="col-sm-5"><input type="text" name="tbLName"  class="form-control" placeholder="Last Name" id="inputText3" value="<?php echo $_POST['tbLName'] ;?>" required /></div>
+                </div>
+          </div><!-- /.row -->
+      </form>
       <hr>
-      <div class="media">
-        <div class="media-left">
-          <a href="#">
-            <img class="media-object" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Marathon_logo.jpg/64px-Marathon_logo.jpg" alt="Generic placeholder image">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Team 2 &nbsp; <span class="label label-info">John Smith</span></h4>
-          <span class="text-muted"><i>Tagline here</i></span>
-          <p>Members: 5</p>
-        </div>
-      </div> 
-    </div>-->
-    <?php build_groups(); ?>
-    
-
+      <h2>Units of Measurment</h2>
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="submit" class="btn btn-success" value="-1">United States (Miles/Meters)</button>
+        <button type="submit" class="btn btn-default" value="1">Metric (Kilometers/Meters)</button>
+      </div>
+      <!--begin groups -->
     </div><!-- /.container -->
 
 
