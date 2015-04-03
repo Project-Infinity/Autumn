@@ -2,12 +2,12 @@
 
     /*
         process.php
-		to be used with Project Pillar of Autumn
+	to be used with Project Pillar of Autumn
         To save time with writing functions that can be used in more
         than one page, they will be included in this file
     */
     
-	//Static varaibles
+	//Static varaibles These are conversion units
 	$METER_2_MILE = 0.000621371;
 	$MILE_2_METER = 1609.34;
 	$MILE_2_KMETER = 1.60934;
@@ -91,6 +91,11 @@
 	
 	function get_UoM()
 	{
+		/*
+			returns the unit of measurement for a paticular user
+			-1 US UNITS (MILES/METERES)
+			1 METRIC UNITS (KILOMETERES/METERES)
+		*/
 		$userID = $_SESSION['active_user'];
 		$conn = db_connect();
 		
@@ -107,6 +112,7 @@
 	function build_distance_ran()
 	{
 		/*
+			Builds the distance ran as a number
 			-1 MILES / METERS
 			 1 KILOMETERS / METERS 
 		*/
@@ -217,6 +223,11 @@
 	
 	function build_navBar()
 	{
+		/*
+			Because the NavBar div is big, updating it would take too long
+			this function builds the navBar div and makes the markup on the other pages eaiser to read
+			any updates to the NavBar are made here. 
+		*/
 		$activeUser = $_SESSION['active_user'];
 		echo '<nav class="navbar navbar-inverse navbar-fixed-top">';
 		echo '<div class="container-fluid">';
