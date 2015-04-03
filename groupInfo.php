@@ -1,10 +1,8 @@
 <?php
     /*
-        Members profile page 
-        (or, Personal Profile Page boo-yah!)
-        
-        this is the ONLY page that uses JQuery and AJAX
-        More information JQuery in the source.js page.
+	Group Info Page
+	This page acts as the "homepage" for a paticular group
+	The group information is retreived by using a $_GET Function and getting the group's ID number
         
     */
     
