@@ -1,10 +1,9 @@
 <?php
     /*
-	Groups page
+	Create Groups Page
         
-        this is the ONLY page that uses JQuery and AJAX
-        More information JQuery in the source.js page.
-        
+        This Page is a userform used to create groups
+        This is in the alpha stage so no functionality works just the design
     */
     
     //Start the Session include the stuff you know the drill
